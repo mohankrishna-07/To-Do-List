@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Get Things Done!</h2>
+        <input type="text" placeholder="Enter task" id="inp">
+        <button onclick="add()">Add</button>
+        <ul id="listcontainer"></ul>
+    </div>
+
+    <style>
+        body {
+            font-family: 'Trebuchet MS';
+            background: linear-gradient(to right, #74ebd5, #1d328e);
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;    }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            width: 300px;
+            text-align: center;    }
+
+        h2 {
+            margin-bottom: 20px;    }
+
+        input {
+            padding: 8px;
+            width: 70%;
+            border-radius: 5px;
+            border: 1px solid gray;    }
+
+        button {
+            padding: 8px 12px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;    }
+        button:hover {
+            background-color: #45a049;    }
+        ul {
+            padding: 0;
+            margin-top: 15px;}
+        li {
+            list-style: none;
+            margin: 10px 0;
+            padding: 8px;
+            background: #f2f2f2;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;    }
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+
+    <script>
+        var input = document.getElementById("inp")
+        var ul = document.getElementById("listcontainer")
+
+        function add(){
+            if(input.value.trim() === "") return;
+
+            var listitem = document.createElement("li")
+
+            listitem.innerHTML = input.value +
+            " <button onclick='deleteitem(event)'>Delete</button>"
+
+            listitem.onclick = function(){
+                listitem.classList.toggle("completed")
+            }
+
+            ul.append(listitem)
+            input.value = ""
+        }
+
+        function deleteitem(event){
+            event.stopPropagation()
+            event.target.parentElement.remove()
+        }
+    </script>
+</body>
+</html>
